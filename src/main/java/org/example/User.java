@@ -1,14 +1,17 @@
 package org.example;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private int id;
     private String name;
     private short pin;
     private double sold;
 
-    public User(String name, short pin, double sold) {
+    public User(int id, String name, short pin, double sold) {
+        this.id = id;
         this.name = name;
         this.pin = pin;
         this.sold = sold;
@@ -26,6 +29,10 @@ public class User {
         return pin;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setPin(short pin) {
         this.pin = pin;
     }
@@ -38,9 +45,7 @@ public class User {
         this.sold = sold;
     }
 
-    public static void addUser(List<User> users, String name, short pin, double sold) {
-        User newUser = new User(name, pin, sold);
-        users.add(newUser);
+    public static void loadUser() {
     }
 
     @Override
