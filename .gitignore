@@ -63,3 +63,6 @@ build/
 hs_err_pid*
 replay_pid*
 >>>>>>> ce55231cf32399c98ab3461563c4f66f7224216a
+
+login.txt
+

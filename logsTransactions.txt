@@ -1,0 +1,3 @@
+[2024-08-07 06:00:51] Deposit succes. For ID = 1001.
+[2024-08-07 06:00:51] Withdraw succes. For ID = 1001.
+[2024-08-07 06:00:51] Transfer succes. From ID1 = 999 to ID2 = 1000.
