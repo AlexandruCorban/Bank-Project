@@ -1,8 +1,57 @@
-[07-08-2024 18:24:42] Connected to PostgreSQL database
-[07-08-2024 18:24:42] ERROR: column "ro56ftsbrobufg1qrsiak6je" does not exist
-  Position: 56
-[07-08-2024 18:24:42] ERROR: column "ro56ftsbrobufg1qrsiak6je" does not exist
-  Position: 57
-[07-08-2024 18:24:42] ERROR: column "ro24ftsbrobumlqatp1jytdz" does not exist
-  Position: 57
-[07-08-2024 18:27:04] Connected to PostgreSQL database
+[07-08-2024 18:46:08] Connected to PostgreSQL database
+[07-08-2024 19:29:24] Connected to PostgreSQL database
+[07-08-2024 19:30:38] Connected to PostgreSQL database
+[07-08-2024 19:39:13] Connected to PostgreSQL database
+[07-08-2024 20:25:26] Connected to PostgreSQL database
+[07-08-2024 20:25:26] Connected to PostgreSQL database
+[07-08-2024 20:36:57] Connected to PostgreSQL database
+[07-08-2024 20:36:57] ERROR: column "sold" does not exist
+  Position: 29
+[07-08-2024 20:37:37] Connected to PostgreSQL database
+[07-08-2024 20:38:51] Connected to PostgreSQL database
+[07-08-2024 20:40:06] Connected to PostgreSQL database
+[07-08-2024 20:47:44] Connected to PostgreSQL database
+[07-08-2024 20:47:58] Connected to PostgreSQL database
+[07-08-2024 20:48:07] Connected to PostgreSQL database
+[07-08-2024 20:48:10] Connected to PostgreSQL database
+[07-08-2024 20:50:22] Connected to PostgreSQL database
+[07-08-2024 20:50:24] Connected to PostgreSQL database
+[07-08-2024 20:50:43] Connected to PostgreSQL database
+[07-08-2024 20:50:52] Connected to PostgreSQL database
+[07-08-2024 20:54:21] Connected to PostgreSQL database
+[07-08-2024 20:54:40] Connected to PostgreSQL database
+[07-08-2024 20:58:20] Connected to PostgreSQL database
+[07-08-2024 20:58:49] Connected to PostgreSQL database
+[07-08-2024 21:04:58] Connected to PostgreSQL database
+[07-08-2024 22:14:23] Connected to PostgreSQL database
+[07-08-2024 22:26:04] Connected to PostgreSQL database
+[07-08-2024 22:27:15] Connected to PostgreSQL database
+[07-08-2024 22:33:31] Connected to PostgreSQL database
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:34:02] logsDB.txt (The process cannot access the file because it is being used by another process)
+[07-08-2024 22:40:39] Connected to PostgreSQL database
+[07-08-2024 22:46:40] Connected to PostgreSQL database
+[07-08-2024 22:49:58] Connected to PostgreSQL database
+[07-08-2024 22:50:34] Connected to PostgreSQL database
+[07-08-2024 22:52:23] Connected to PostgreSQL database
+[07-08-2024 22:56:28] Connected to PostgreSQL database
+[07-08-2024 22:59:30] Connected to PostgreSQL database
+[07-08-2024 23:01:59] Connected to PostgreSQL database
+[07-08-2024 23:05:15] Connected to PostgreSQL database
+[07-08-2024 23:05:37] Connected to PostgreSQL database
+[07-08-2024 23:06:07] Connected to PostgreSQL database
+[07-08-2024 23:07:03] Connected to PostgreSQL database
+[07-08-2024 23:07:46] Connected to PostgreSQL database
+[07-08-2024 23:11:04] Connected to PostgreSQL database
+[07-08-2024 23:14:32] Connected to PostgreSQL database
+[07-08-2024 23:15:35] Connected to PostgreSQL database
+[07-08-2024 23:15:53] Connected to PostgreSQL database

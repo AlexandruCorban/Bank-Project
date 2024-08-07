@@ -1,3 +1,16 @@
-[07-08-2024 18:27:04] Deposit succes. For iban = RO56FTSBROBUFG1QRSIAK6JE.
-[07-08-2024 18:27:04] Withdraw succes. For iban = RO56FTSBROBUFG1QRSIAK6JE.
-[07-08-2024 18:27:04] Transfer succes. From iban1 = RO24FTSBROBUMLQATP1JYTDZ to iban2 = RO56FTSBROBUFG1QRSIAK6JE.
+[07-08-2024 23:11:31] Deposit failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:11:31] Withdraw failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found or Sold less then amount.
+[07-08-2024 23:11:31] Transfer failed. Account iban = RO24FTSBROBUMLQATP1JYTDZ not found or Sold less then amount.
+[07-08-2024 23:11:31] Transfer failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:14:32] Deposit failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:14:32] Withdraw failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found or Sold less then amount.
+[07-08-2024 23:14:32] Transfer failed. Account iban = RO24FTSBROBUMLQATP1JYTDZ not found or Sold less then amount.
+[07-08-2024 23:14:32] Transfer failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:15:35] Deposit failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:15:35] Withdraw failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found or Sold less then amount.
+[07-08-2024 23:15:35] Transfer failed. Account iban = RO24FTSBROBUMLQATP1JYTDZ not found or Sold less then amount.
+[07-08-2024 23:15:35] Transfer failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:15:53] Deposit failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
+[07-08-2024 23:15:53] Withdraw failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found or Sold less then amount.
+[07-08-2024 23:15:53] Transfer failed. Account iban = RO24FTSBROBUMLQATP1JYTDZ not found or Sold less then amount.
+[07-08-2024 23:15:53] Transfer failed. Account iban = RO56FTSBROBUFG1QRSIAK6JE not found.
