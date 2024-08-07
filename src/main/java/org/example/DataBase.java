@@ -1,4 +1,6 @@
 package org.example;
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.sql.*;
 import java.util.Random;
 
@@ -29,7 +31,7 @@ public class DataBase {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                System.out.print(rs.getInt("id") + " ");
+                System.out.print(rs.getString("iban") + " ");
                 System.out.print(rs.getString("name") + " ");
                 System.out.print(rs.getShort("pin") + " ");
                 System.out.println(rs.getDouble("sold") + " ");
@@ -55,20 +57,21 @@ public class DataBase {
         Random rand = new Random();
 
         for (int i = 0; i < size; i++) {
+            String iban = generateIban();
             String name = names[rand.nextInt(names.length)];
             String surname = surnames[rand.nextInt(surnames.length)];
             String fullName = name + " " + surname;
             short pin = (short)(1000 + rand.nextInt(9000));
             double sold = rand.nextDouble() * 10000;
 
-            addUser(conn, tableName, fullName, pin, sold);
+            addUser(conn, tableName, iban, fullName, pin, sold);
         }
 
     }
 
-    public void addUser(Connection conn, String tableName, String name, int pin, double sold) {
+    public void addUser(Connection conn, String tableName, String iban, String name, int pin, double sold) {
         try {
-            String query = String.format("INSERT INTO %s(name, pin, sold) VALUES('%s','%d','%f')", tableName, name, pin, sold);
+            String query = String.format("INSERT INTO %s(iban, name, pin, sold) VALUES('%s','%s','%d','%f')",tableName, iban, name, pin, sold);
             statement = conn.createStatement();
             statement.executeUpdate(query);
 
@@ -84,20 +87,17 @@ public class DataBase {
             statement = conn.createStatement();
             statement.executeUpdate(query);
             Logs.log(String.format("All users from table %s have been deleted.", tableName), "logsDB.txt");
-
-            String queryResetId = String.format("ALTER SEQUENCE %s_id_seq RESTART WITH 1", tableName);
-            statement.executeUpdate(queryResetId);
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void deleteUser(Connection conn, String tableName, int id) {
+    public void deleteUser(Connection conn, String tableName, String iban) {
         try {
-            String query = String.format("DELETE FROM %s WHERE id = '%d'", tableName, id);
+            String query = String.format("DELETE FROM %s WHERE iban = '%s'", tableName, iban);
             statement = conn.createStatement();
             statement.executeUpdate(query);
-            Logs.log(String.format("Id %d deleted from table %s.", id, tableName), "logsDB.txt");
+            Logs.log(String.format("User with iban %s deleted from table %s.", iban, tableName), "logsDB.txt");
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
@@ -109,15 +109,31 @@ public class DataBase {
             statement = conn.createStatement();
             rs = statement.executeQuery(query);
             while (rs.next()) {
-                int id = rs.getInt("id");
+                String iban = rs.getString("iban");
                 String fullname = rs.getString("name");
                 short pin = rs.getShort("pin");
                 double sold = rs.getDouble("sold");
 
-                System.out.printf("%d %s %d %.2f%n", id, fullname, pin, sold);
+                System.out.printf("%s %s %d %.2f%n", iban, fullname, pin, sold);
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
+    }
+
+    public String generateIban () {
+        Random rand = new Random();
+
+        String[] bankcodes = {
+                "BTRLRO22", "RNCBROBU", "IVVIROB2", "FTSBROBU", "BCRLROBU", "BKCHROBU"
+        };
+        int firstDigitis = (10 + rand.nextInt(90));
+        String bankcode = bankcodes[rand.nextInt(bankcodes.length)];
+        String accountNumber =  RandomStringUtils.random(12, true, true);
+
+        String iban = "RO" + firstDigitis + bankcode + accountNumber;
+        iban = iban.toUpperCase();
+
+        return iban;
     }
 }

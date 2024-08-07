@@ -13,15 +13,17 @@ public class Main {
 
 
         // Functions test
-        db.deleteAllUsers(conn, "users");
-        db.generateUsers(conn, "users", 1000);
-        db.loadUsers(conn, "users");
-        db.addUser(conn, "users", "Corban Alexandru", 4564, 10626.43);
-        db.deleteUser(conn, "users", 1000);
-        db.searchUserByName(conn, "users", "Corban Alexandru");
-
-        transactions.addSold(conn, "users", 1001, 373.57);
-        transactions.removeSold(conn, "users", 1001, 1000);
-        transactions.transferSoldFromUser1toUser2(conn, "users", 999, 1000, 1000.0);
-    }
+//        db.deleteAllUsers(conn, "users");
+//        db.generateUsers(conn, "users", 10000);
+//        db.loadUsers(conn, "users");
+//        db.addUser(conn, "users", db.generateIban(), "Corban Alexandru", 4564, 10626.43);
+//        db.deleteUser(conn, "users", db.generateIban());
+//        db.searchUserByName(conn, "users", "Corban Alexandru");
+//
+//        transactions.addSold(conn, "users", "RO56FTSBROBUFG1QRSIAK6JE", 373.57);
+//        transactions.removeSold(conn, "users", "RO56FTSBROBUFG1QRSIAK6JE", 1000);
+//        transactions.transferSoldFromUser1toUser2(conn, "users", "RO24FTSBROBUMLQATP1JYTDZ", "RO56FTSBROBUFG1QRSIAK6JE", 1000.0);
+//
+//        db.loadUsers(conn, "users");
+   }
 }

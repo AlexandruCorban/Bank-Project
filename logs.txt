@@ -1,1 +1,8 @@
-[2024-08-07 06:00:50] Connected to PostgreSQL database
+[07-08-2024 18:24:42] Connected to PostgreSQL database
+[07-08-2024 18:24:42] ERROR: column "ro56ftsbrobufg1qrsiak6je" does not exist
+  Position: 56
+[07-08-2024 18:24:42] ERROR: column "ro56ftsbrobufg1qrsiak6je" does not exist
+  Position: 57
+[07-08-2024 18:24:42] ERROR: column "ro24ftsbrobumlqatp1jytdz" does not exist
+  Position: 57
+[07-08-2024 18:27:04] Connected to PostgreSQL database

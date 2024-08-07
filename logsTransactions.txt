@@ -1,3 +1,3 @@
-[2024-08-07 06:00:51] Deposit succes. For ID = 1001.
-[2024-08-07 06:00:51] Withdraw succes. For ID = 1001.
-[2024-08-07 06:00:51] Transfer succes. From ID1 = 999 to ID2 = 1000.
+[07-08-2024 18:27:04] Deposit succes. For iban = RO56FTSBROBUFG1QRSIAK6JE.
+[07-08-2024 18:27:04] Withdraw succes. For iban = RO56FTSBROBUFG1QRSIAK6JE.
+[07-08-2024 18:27:04] Transfer succes. From iban1 = RO24FTSBROBUMLQATP1JYTDZ to iban2 = RO56FTSBROBUFG1QRSIAK6JE.
