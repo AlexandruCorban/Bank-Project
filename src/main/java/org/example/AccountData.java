@@ -9,7 +9,7 @@ public class AccountData {
         private short pin;
         private double sold;
 
-        public AccountInfo(String name, String phoneNumber, short pin, double sold){
+        public AccountInfo(String name, String phoneNumber, short pin, double sold) {
             this.name = name;
             this.phoneNumber = phoneNumber;
             this.pin = pin;
@@ -19,46 +19,36 @@ public class AccountData {
         public String getName() {
             return name;
         }
-
         public double getSold() {
             return sold;
         }
-
-        public short getPin() {
-            return pin;
-        }
-
-        public String getPhoneNumber() {
-            return phoneNumber;
-        }
+        public short getPin() { return pin; }
+        public String getPhoneNumber() { return phoneNumber; }
 
     }
 
-    public static AccountInfo getAccountData(Connection conn, String tableName, String iban)  {
-        ResultSet rs = null;
-        Statement statement = null;
+    public static AccountInfo getAccountData(String tableName, String iban) {
+        DataBase db = new DataBase();
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
+            String query = String.format("SELECT * FROM %s WHERE iban = '%s'", tableName, iban);
 
-        try {
-        String query = String.format("SELECT * FROM %s WHERE iban = '%s'", tableName, iban);
+            String name;
+            String phoneNumber;
+            short pin;
+            double sold;
 
-        statement = conn.createStatement();
-        rs = statement.executeQuery(query);
-
-        String name;
-        String phoneNumber;
-        short pin;
-        double sold;
-
-        if (rs.next()) {
-            name = rs.getString("name");
-            phoneNumber  = rs.getString("phonenumber");
-            pin = rs.getShort("pin");
-            sold = rs.getDouble("sold");
-            return new AccountInfo(name, phoneNumber, pin, sold);
-        }
-      } catch (Exception e) {
+            try (ResultSet rs = statement.executeQuery(query)) {
+                if (rs.next()) {
+                    name = rs.getString("name");
+                    phoneNumber = rs.getString("phonenumber");
+                    pin = rs.getShort("pin");
+                    sold = rs.getDouble("sold");
+                    return new AccountInfo(name, phoneNumber, pin, sold);
+                }
+            }
+        } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
-        return new AccountInfo("User not exist", " ", (short)0, 0.0);
+        return new AccountInfo("User not exist", " ", (short) 0, 0.0);
     }
 }

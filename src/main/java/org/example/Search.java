@@ -5,102 +5,103 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Search {
+    DataBase db = new DataBase();
 
-    Statement statement = null;
-    ResultSet rs = null;
-
-    public void searchUserByName(Connection conn, String tableName, String name) {
-        try {
+    public void searchUserByName(String tableName, String name) {
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s WHERE name = '%s'", tableName, name);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            while (rs.next()) {
-                String iban = rs.getString("iban");
-                String fullname = rs.getString("name");
-                String phoneNumber = (rs.getString("phonenumber") + " ");
-                short pin = rs.getShort("pin");
-                double sold = rs.getDouble("sold");
 
-                System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phoneNumber, pin, sold);
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next()) {
+                    String iban = rs.getString("iban");
+                    String fullname = rs.getString("name");
+                    String phoneNumber = (rs.getString("phonenumber") + " ");
+                    short pin = rs.getShort("pin");
+                    double sold = rs.getDouble("sold");
+
+                    System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phoneNumber, pin, sold);
+                }
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void searchUserByIban(Connection conn, String tableName, String Iban) {
-        try {
+    public void searchUserByIban(String tableName, String Iban) {
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s WHERE iban = '%s'", tableName, Iban);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            while (rs.next()) {
-                String iban = rs.getString("iban");
-                String fullname = rs.getString("name");
-                String phoneNumber = (rs.getString("phonenumber") + " ");
-                short pin = rs.getShort("pin");
-                double sold = rs.getDouble("sold");
 
-                System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phoneNumber, pin, sold);
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next()) {
+                    String iban = rs.getString("iban");
+                    String fullname = rs.getString("name");
+                    String phoneNumber = (rs.getString("phonenumber") + " ");
+                    short pin = rs.getShort("pin");
+                    double sold = rs.getDouble("sold");
+
+                    System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phoneNumber, pin, sold);
+                }
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
-    public void searchUserByPhoneNumber(Connection conn, String tableName, String phoneNumber) {
-        try {
+    public void searchUserByPhoneNumber(String tableName, String phoneNumber) {
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s WHERE phonenumber = '%s'", tableName, phoneNumber);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            while (rs.next()) {
-                String iban = rs.getString("iban");
-                String fullname = rs.getString("name");
-                String phonenumber = (rs.getString("phonenumber") + " ");
-                short pin = rs.getShort("pin");
-                double sold = rs.getDouble("sold");
 
-                System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phonenumber, pin, sold);
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next()) {
+                    String iban = rs.getString("iban");
+                    String fullname = rs.getString("name");
+                    String phonenumber = (rs.getString("phonenumber") + " ");
+                    short pin = rs.getShort("pin");
+                    double sold = rs.getDouble("sold");
+
+                    System.out.printf("%s %s %s %d %.2f%n", iban, fullname, phonenumber, pin, sold);
+                }
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void filterDescSold(Connection conn, String tableName, int size) {
-        try {
+    public void filterDescSold(String tableName, int size) {
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s ORDER BY sold DESC", tableName);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
 
-            while (rs.next() && size > 0) {
-                String iban = rs.getString("iban");
-                String fullname = rs.getString("name");
-                String phoneNumber = (rs.getString("phonenumber") + " ");
-                short pin = rs.getShort("pin");
-                double sold = rs.getDouble("sold");
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next() && size > 0) {
+                    String iban = rs.getString("iban");
+                    String fullname = rs.getString("name");
+                    String phoneNumber = (rs.getString("phonenumber") + " ");
+                    short pin = rs.getShort("pin");
+                    double sold = rs.getDouble("sold");
 
-                System.out.printf("%d %s %s %s %d %.2f%n",(100 - size + 1) ,iban, phoneNumber, fullname, pin, sold);
-                size--;
+                    System.out.printf("%d %s %s %s %d %.2f%n", (100 - size + 1), iban, phoneNumber, fullname, pin, sold);
+                    size--;
+                }
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void filterAscSold(Connection conn, String tableName, int size) {
-        try {
+    public void filterAscSold(String tableName, int size) {
+        try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s ORDER BY sold ASC", tableName);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
 
-            while (rs.next() && size > 0) {
-                String iban = rs.getString("iban");
-                String fullname = rs.getString("name");
-                String phoneNumber = (rs.getString("phonenumber") + " ");
-                short pin = rs.getShort("pin");
-                double sold = rs.getDouble("sold");
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next() && size > 0) {
+                    String iban = rs.getString("iban");
+                    String fullname = rs.getString("name");
+                    String phoneNumber = (rs.getString("phonenumber") + " ");
+                    short pin = rs.getShort("pin");
+                    double sold = rs.getDouble("sold");
 
-                System.out.printf("%d %s %s %s %d %.2f%n",(100 - size + 1) ,iban, fullname, phoneNumber, pin, sold);
-                size--;
+                    System.out.printf("%d %s %s %s %d %.2f%n", (100 - size + 1), iban, fullname, phoneNumber, pin, sold);
+                    size--;
+                }
             }
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");

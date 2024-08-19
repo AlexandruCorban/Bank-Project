@@ -4,35 +4,32 @@ import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
-        DataBase db = new DataBase();
-        Transactions transactions = new Transactions();
-        Search search = new Search();
+       DataBase db = new DataBase();
+       Transactions transactions = new Transactions();
+       Search search = new Search();
 
-        Login.loginDB("login.txt");
+       Login.loginDB("login.txt");
 
-        Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword);
+//     Functions test
+       db.deleteAllUsers("users");
+       db.generateUsers("users", 1000);
+       db.loadUsers("users");
 
+       try (Connection conn = db.getConnection(Login.dbName, Login.dbUsername, Login.dbPassword)) {
+           db.addUser(conn, "users", db.generateIban(), "Corban Alexandru", db.generatePhoneNumber(), 4524, 10626.43);
+       } catch (Exception e) {}
 
-//        Functions test
-       db.deleteAllUsers(conn, "users");
-       db.generateUsers(conn, "users", 1000);
-       db.loadUsers(conn, "users");
-       db.addUser(conn, "users", db.generateIban(), "Corban Alexandru", db.generatePhoneNumber(), 4524,10626.43);
-       db.deleteUser(conn, "users", "RO74BSTRROBU008803320682");
-
-
-        transactions.addSold(conn, "users", "RO91BSTRROBU825197795078", 460.00);
-        transactions.removeSold(conn, "users", "RO89CETRROBU325210613219", 218);
-        transactions.transferSoldFromUser1toUser2(conn, "users", "RO48TEBPROBU599222014478", "RO51PIRBROBU090403549749", 1000.0);
-
-        db.loadUsers(conn, "users");
+       db.deleteUser("users", "RO27PROBROBU478420207075");
 
 
-       search.filterDescSold(conn, "users", 100);
-       search.filterAscSold(conn, "users", 100);
-       search.searchUserByName(conn, "users", "Corban Alexandru");
-       search.searchUserByIban(conn, "users", "RO89CETRROBU325210613219");
-       search.searchUserByPhoneNumber(conn, "users", "07754509080");
+       transactions.addSold("users", "RO48BRPROFBU894268725884", 374.00);
+       transactions.removeSold("users", "RO48BRPROFBU894268725884 ", 100.43);
+       transactions.transferSoldFromUser1toUser2("users", "RO48BRPROFBU894268725884", "RO62INGBROBU206980703262", 1000.0);
 
-    }
+       search.filterDescSold("users", 100);
+       search.filterAscSold("users", 100);
+       search.searchUserByName("users", "Corban Alexandru");
+       search.searchUserByIban("users", "RO62INGBROBU206980703262");
+       search.searchUserByPhoneNumber("users", "07717333891");
+   }
 }

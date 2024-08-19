@@ -9,10 +9,6 @@ import java.sql.Connection;
 
 
 public class DataBase {
-
-    Statement statement = null;
-    ResultSet rs = null;
-
     public Connection getConnection(String dbname, String user, String pass) {
         Connection conn = null;
         try {
@@ -29,24 +25,26 @@ public class DataBase {
         return conn;
     }
 
-    public void loadUsers(Connection conn, String tableName) {
-        try {
+    public void loadUsers(String tableName) {
+        try (Connection conn = getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("SELECT * FROM %s", tableName);
-            statement = conn.createStatement();
-            rs = statement.executeQuery(query);
-            while (rs.next()) {
-                System.out.print(rs.getString("iban") + " ");
-                System.out.print(rs.getString("name") + " ");
-                System.out.print(rs.getString("phonenumber") + " ");
-                System.out.print(rs.getShort("pin") + " ");
-                System.out.println(rs.getDouble("sold") + " ");
+
+            try (ResultSet rs = statement.executeQuery(query)) {
+                while (rs.next()) {
+                    System.out.print(rs.getString("iban") + " ");
+                    System.out.print(rs.getString("name") + " ");
+                    System.out.print(rs.getString("phonenumber") + " ");
+                    System.out.print(rs.getShort("pin") + " ");
+                    System.out.println(rs.getDouble("sold") + " ");
+                }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void generateUsers(Connection conn, String tableName, int size) {
+
+    public void generateUsers(String tableName, int size) {
         String[] names = {
                 "Andrei", "Ana", "Ion", "Maria", "George", "Elena", "Mihai", "Ioana", "Paul", "Roxana",
                 "Alexandru", "Gabriela", "Daniel", "Laura", "Cristian", "Simona", "Florin", "Carmen", "Stefan", "Adriana",
@@ -73,60 +71,63 @@ public class DataBase {
         };
 
         Random rand = new Random();
-        Set<String> phoneNumbers = new HashSet<>();
-        Set<String> ibans = new HashSet<>();
+        Set < String > phoneNumbers = new HashSet < > ();
+        Set < String > ibans = new HashSet < > ();
 
-        for (int i = 0; i < size; i++) {
-            String iban;
+        try (Connection conn = getConnection(Login.dbName, Login.dbUsername, Login.dbPassword)) {
+            for (int i = 0; i < size; i++) {
+                String iban;
 
-            do {
-                iban = generateIban();
-            } while (!ibans.add(iban));
+                do {
+                    iban = generateIban();
+                } while (!ibans.add(iban));
 
-            String name = names[rand.nextInt(names.length)];
-            String surname = surnames[rand.nextInt(surnames.length)];
-            String fullName = name + " " + surname;
-            String phoneNumber;
+                String name = names[rand.nextInt(names.length)];
+                String surname = surnames[rand.nextInt(surnames.length)];
+                String fullName = name + " " + surname;
+                String phoneNumber;
 
-            do {
-                phoneNumber = generatePhoneNumber();
-            } while (!phoneNumbers.add(phoneNumber));
+                do {
+                    phoneNumber = generatePhoneNumber();
+                } while (!phoneNumbers.add(phoneNumber));
 
-            short pin = (short)(1000 + rand.nextInt(9000));
-            double sold = rand.nextDouble() * 10000;
+                short pin = (short)(1000 + rand.nextInt(9000));
+                double sold = rand.nextDouble() * 10000;
 
-            addUser(conn, tableName, iban, fullName, phoneNumber, pin, sold);
-        }
-    }
-
-    public void addUser(Connection conn, String tableName, String iban, String name, String phoneNumber, int pin, double sold) {
-        try {
-            String query = String.format("INSERT INTO %s(iban, name, phonenumber, pin, sold) VALUES('%s','%s','%s', '%d','%f')",tableName, iban, name, phoneNumber, pin, sold);
-            statement = conn.createStatement();
-            statement.executeUpdate(query);
-
-            Logs.log(String.format("User %s added to table %s.", name, tableName), "logsDB.txt");
-        } catch (Exception e) {
+                addUser(conn, tableName, iban, fullName, phoneNumber, pin, sold);
+            }
+        } catch (SQLException e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void deleteAllUsers(Connection conn, String tableName) {
-        try {
-            String query = String.format("DELETE FROM %s", tableName);
-            statement = conn.createStatement();
+    public void addUser(Connection conn, String tableName, String iban, String name, String phoneNumber, int pin, double sold) {
+        try (Statement statement = conn.createStatement()) {
+            String query = String.format("INSERT INTO %s(iban, name, phonenumber, pin, sold) VALUES('%s','%s','%s', '%d','%f')", tableName, iban, name, phoneNumber, pin, sold);
             statement.executeUpdate(query);
+
+            Logs.log(String.format("User %s added to table %s.", name, tableName), "logsDB.txt");
+        } catch (SQLException e) {
+            Logs.log(e.getMessage(), "logs.txt");
+        }
+    }
+
+    public void deleteAllUsers(String tableName) {
+        try (Connection conn = getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
+            String query = String.format("DELETE FROM %s", tableName);
+            statement.executeUpdate(query);
+
             Logs.log(String.format("All users from table %s have been deleted.", tableName), "logsDB.txt");
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
         }
     }
 
-    public void deleteUser(Connection conn, String tableName, String iban) {
-        try {
+    public void deleteUser(String tableName, String iban) {
+        try (Connection conn = getConnection(Login.dbName, Login.dbUsername, Login.dbPassword); Statement statement = conn.createStatement()) {
             String query = String.format("DELETE FROM %s WHERE iban = '%s'", tableName, iban);
-            statement = conn.createStatement();
             statement.executeUpdate(query);
+
             Logs.log(String.format("User with iban %s deleted from table %s.", iban, tableName), "logsDB.txt");
         } catch (Exception e) {
             Logs.log(e.getMessage(), "logs.txt");
